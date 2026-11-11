@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusEats</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Toast notifications -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Modal for dialogs (checkout, alerts, etc.) -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" id="modal-close">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Sidebar navigation (hidden until logged in) -->
+  <nav id="sidebar" class="sidebar hidden">
+    <div class="sidebar-header">
+      <h2>CampusEats</h2>
+    </div>
+    <ul class="nav-list" id="nav-list">
+      <!-- Items inserted by JS based on role -->
+    </ul>
+    <button id="logoutBtn" class="btn logout-btn">Logout</button>
+  </nav>
+
+  <!-- Main content area -->
+  <main id="main" class="main hidden">
+    <!-- Student Dashboard -->
+    <section id="dashboard-student" class="dashboard-section hidden">
+      <header class="dash-header"><h2>Student Dashboard</h2></header>
+      <div class="search-bar">
+        <input type="text" id="menuSearch" placeholder="Search food..." />
+        <select id="categoryFilter"><option value="">All Categories</option></select>
+      </div>
+      <div id="foodMenu" class="grid-container"></div>
+      <h3>Your Cart</h3>
+      <div id="cart-drawer" class="cart-drawer hidden">
+        <ul id="cartItems"></ul>
+        <div class="cart-summary">
+          <p>Total: $<span id="cartTotal">0.00</span></p>
+          <button id="checkoutBtn" class="btn primary-btn">Checkout</button>
+        <form id="orderForm">
+        <button id="checkoutBtn" class="btn primary-btn">Checkout</button>
+      </form>
+      </div>
+      <h3>Order History</h3>
+      <div id="orderHistory" class="order-history"></div>
+    </section>
+
+    <!-- Staff Dashboard -->
+    <section id="dashboard-staff" class="dashboard-section hidden">
+      <header class="dash-header"><h2>Staff Dashboard</h2></header>
+      <h3>Incoming Orders</h3>
+      <div id="incomingOrders" class="order-list"></div>
+      <h3>Manage Food Items</h3>
+      <button id="addFoodBtn" class="btn secondary-btn">Add New Food</button>
+      <div id="foodManagement" class="grid-container"></div>
+      <h3>Inventory</h3>
+      <div id="inventoryManagement" class="grid-container"></div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="dashboard-admin" class="dashboard-section hidden">
+      <header class="dash-header"><h2>Admin Dashboard</h2></header>
+      <div id="adminStats" class="stats-grid"></div>
+      <h3>Manage Users</h3>
+      <div id="userManagement" class="grid-container"></div>
+      <h3>Food & Categories</h3>
+      <div id="adminFoodManagement" class="grid-container"></div>
+      <h3>Inventory Overview</h3>
+      <div id="adminInventory" class="grid-container"></div>
+      <h3>Sales Reports</h3>
+      <canvas id="salesChart" width="400" height="200"></canvas>
+    </section>
+  </main>
+
+  <!-- Authentication forms (shown when not logged in) -->
+  <section id="auth-section" class="auth-section">
+    <div class="auth-container" id="loginContainer">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit" class="btn primary-btn">Login</button>
+      </form>
+      <div id="loginMsg"></div>
+      <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+    </div>
+    <div class="auth-container hidden" id="registerContainer">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <input type="email" id="regEmail" placeholder="Email" required />
+        <input type="password" id="regPassword" placeholder="Password" required />
+        <input type="text" id="regFullName" placeholder="Full Name" />
+        <select id="regRole" required>
+          <option value="student">Student</option>
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+        </select>
+        <button type="submit" class="btn primary-btn">Register</button>
+      </form>
+      <div id="registerMsg"></div>
+      <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
+    </div>
+  </section>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+/* --------------------------------------------------------------
+   CampusEats – Premium Modern UI
+   -------------------------------------------------------------- */
+
+/* Font import – Inter (already loaded via HTML) */
+
+:root {
+  --primary: #ff6b6b;               /* Vibrant accent */
+  --secondary: #4ecdc4;             /* Complementary */
+  --bg: #f5f7fa;                    /* Light neutral background */
+  --bg-dark: #2c3e50;               /* Dark sidebar */
+  --text: #2c3e50;
+  --text-light: #ecf0f1;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --border: rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: 0.2s ease;
+}
+
+.hidden { display: none !important; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Toast ----------- */
+.toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  min-width: 250px;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  color: #fff;
+  background: rgba(0,0,0,0.75);
+  z-index: 2000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.success { background: rgba(46, 204, 113, 0.9); }
+.toast.error { background: rgba(231, 76, 60, 0.9); }
+
+/* ---------- Modal ----------- */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+}
+.modal-content {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.modal-close {
+  position: absolute;
+  top: 0.5rem; right: 0.8rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* ---------- Sidebar ----------- */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 260px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  padding: 1.5rem 1rem;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--transition);
+  z-index: 1000;
+}
+.sidebar.hidden { transform: translateX(-100%); }
+.sidebar-header h2 { margin: 0 0 1.5rem; font-weight: 700; color: var(--text-light); }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-list li { margin: 0.6rem 0; }
+.nav-list a {
+  color: var(--text-light);
+  font-weight: 500;
+  display: block;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+.nav-list a:hover, .nav-list a.active { background: rgba(255,255,255,0.1); }
+.logout-btn { width: 100%; margin-top: 2rem; background: var(--primary); }
+
+/* ---------- Main Content ----------- */
+.main {
+  margin-left: 260px;
+  padding: 2rem;
+  min-height: 100vh;
+  transition: margin-left var(--transition);
+}
+.main.hidden { margin-left: 0; }
+
+/* ---------- Auth Section ---------- */
+.auth-section {
+  max-width: 420px;
+  margin: 4rem auto;
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  backdrop-filter: blur(6px);
+}
+.auth-container { display: flex; flex-direction: column; }
+.auth-container.hidden { display: none; }
+.auth-container h2 { margin-bottom: 1rem; text-align: center; }
+.auth-container input, .auth-container select, .auth-container button {
+  margin-bottom: 0.8rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.primary-btn { background: var(--primary); color: #fff; }
+.primary-btn:hover { background: #e05555; }
+.secondary-btn { background: var(--secondary); color: #fff; }
+.secondary-btn:hover { background: #3ab4ab; }
+
+/* ---------- Grid Layout for Cards ---------- */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.card img { width: 100%; height: 150px; object-fit: cover; }
+.card-body { padding: 0.8rem; flex-grow: 1; display: flex; flex-direction: column; }
+.card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; }
+.card-price { margin-top: auto; font-weight: 500; color: var(--primary); }
+.card button { margin-top: 0.6rem; width: 100%; }
+
+/* ---------- Search Bar ---------- */
+.search-bar { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.search-bar input, .search-bar select { flex: 1; }
+
+/* ---------- Cart Drawer ---------- */
+.cart-drawer {
+  position: fixed;
+  top: 0; right: -350px;
+  width: 320px;
+  height: 100vh;
+  background: var(--card-bg);
+  box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  overflow-y: auto;
+  transition: right var(--transition);
+  z-index: 1100;
+}
+.cart-drawer.open { right: 0; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+.cart-item span { flex: 1; }
+.qty-controls { display: flex; align-items: center; }
+.qty-controls button { width: 24px; height: 24px; padding: 0; margin: 0 0.2rem; font-size: 0.9rem; }
+.cart-summary { margin-top: 1rem; text-align: right; }
+
+/* ---------- Order Lists ---------- */
+.order-list, .order-history {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.order-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+}
+.order-card header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.order-actions button { margin-right: 0.5rem; }
+
+/* ---------- Admin Stats Grid ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.stat-card h4 { margin: 0.5rem 0; color: var(--primary); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .sidebar { width: 200px; }
+  .main { margin-left: 200px; }
+}
+@media (max-width: 600px) {
+  .sidebar { transform: translateX(-100%); position: fixed; }
+  .sidebar.visible { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .cart-drawer { width: 260px; }
+}
